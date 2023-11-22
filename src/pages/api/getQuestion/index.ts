@@ -28,6 +28,7 @@ export default async function handler(
     question = {
       username: req.body.username,
       question: req.body.question,
+      checked: false,
     };
     const createQuestion = await prisma.question.create({
       data: question,

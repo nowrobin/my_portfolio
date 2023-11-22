@@ -8,20 +8,14 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    const allQuestion = await prisma.question.findMany({});
+    const allQuestion = await prisma.question.findMany({
+      where: {
+        checked: false,
+      },
+    });
     res.json({
       status: 200,
       allQuestion,
     });
-  }
-  if (req.method === "UPDATE") {
-    const updateQuestion = await prisma.question.update({
-      where: { id: Number(req.body.id) },
-      data: {
-        answer: req.body.answer,
-        checked: true,
-      },
-    });
-    res.json(updateQuestion);
   }
 }

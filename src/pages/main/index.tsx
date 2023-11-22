@@ -7,14 +7,12 @@ import AnswerCard from "@/components/answerCard";
 export default function Main() {
   const [answer, setAnswer] = useState<answerProp[]>([]);
   useEffect(() => {
-    console.log(answer);
-    fetch("/api/readAnswer", {
+    fetch("/api/getQuestion", {
       method: "GET",
     })
       .then((response) => response.json())
       .then((data) => setAnswer(data.allQuestion));
   }, []);
-  console.log(answer);
   return (
     <div className="bg-black flex flex-col ">
       <div className="Header h-16 text-3xl leading-loose flex flex-row gap-8 text-center justify-end mr-8">
