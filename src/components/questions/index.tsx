@@ -31,7 +31,7 @@ export default function Questions() {
         placeholder="ask me!!"
         onChange={onChange}
       ></input>
-      <button className=" h-24   hover:bg-violet-600 " onClick={onClick}>
+      <button className=" h-24  hover:bg-violet-600 " onClick={onClick}>
         클릭
       </button>
     </div>

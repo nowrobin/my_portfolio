@@ -14,6 +14,7 @@ export default function Main() {
       .then((response) => response.json())
       .then((data) => setAnswer(data.allQuestion));
   }, []);
+  console.log(answer);
   return (
     <div className="bg-black flex flex-col ">
       <div className="Header h-16 text-3xl leading-loose flex flex-row gap-8 text-center justify-end mr-8">
@@ -27,7 +28,7 @@ export default function Main() {
       {/* {answer.map((i, key) => {
           return <div key={key}>{i.question}</div>;
         })} */}
-      <div className="answerWrapper h-32 animate-lefting flex flex-nowrap flex-row  gap-8 ">
+      <div className="answerWrapper h-32 animate-lefting flex w-[3000px] flex-row  gap-8 ">
         {answer.map((i, key) => {
           return (
             <AnswerCard

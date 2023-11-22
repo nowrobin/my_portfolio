@@ -10,7 +10,15 @@ export default async function handler(
   let question: Prisma.QuestionCreateInput;
 
   if (req.method === "GET") {
-    const allQuestion = await prisma.question.findMany({});
+    const allQuestion = await prisma.question.findMany({
+      where: {
+        NOT: [
+          {
+            answer: null,
+          },
+        ],
+      },
+    });
     res.json({
       status: 200,
       allQuestion,
@@ -20,7 +28,6 @@ export default async function handler(
     question = {
       username: req.body.username,
       question: req.body.question,
-      answer: "",
     };
     const createQuestion = await prisma.question.create({
       data: question,
