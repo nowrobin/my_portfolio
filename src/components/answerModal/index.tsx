@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function AnswerModal({ id, question, username }: answerProp) {
   const [answer, setAnswer] = useState("");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
+    
   };
   const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     fetch("/api/updateAnswer", {

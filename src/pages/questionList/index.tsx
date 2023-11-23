@@ -7,16 +7,27 @@ import { MouseEventHandler, useEffect, useState } from "react";
 export default function QuestionList() {
   const [Uncheckedqlist, setUncheckedqlist] = useState<answerProp[]>([]);
   const [Checkedqlist, setCheckedqlist] = useState<answerProp[]>([]);
+  const [Qlist, setQlist] = useState<answerProp[]>([]);
   const [Clicked, setClick] = useState<boolean>(false);
   const [Target, setTarget] = useState();
+  // useEffect(() => {
+  //   fetch("/api/uncheckedQ", { method: "GET" })
+  //     .then((res) => res.json())
+  //     .then((data) => setUncheckedqlist(data.allQuestion));
+  //   fetch("/api/checkedQ", { method: "GET" })
+  //     .then((res) => res.json())
+  //     .then((data) => setCheckedqlist(data.allQuestion));
+  // }, []);
+
   useEffect(() => {
-    fetch("/api/uncheckedQ", { method: "GET" })
+    fetch("/api/getAllQ", { method: "GET" })
       .then((res) => res.json())
-      .then((data) => setUncheckedqlist(data.allQuestion));
-    fetch("/api/checkedQ", { method: "GET" })
-      .then((res) => res.json())
-      .then((data) => setCheckedqlist(data.allQuestion));
-  }, []);
+      .then((data) => setQlist(data.allQuestion));
+  });
+  // for(let i in Qlist){
+  //   if(Qlist[i].)
+  // }
+
   //api 호출 할때 다 받아와서 나누어주는 작업 하면는 더 시간이 단축됨,
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -61,12 +72,12 @@ export default function QuestionList() {
         })}
       </div>
       Clicked &&{" "}
-      <AnswerModal
+      {/* <AnswerModal
         id={0}
         username={Target.username}
         question={Target.question}
         answer={null}
-      ></AnswerModal>
+      ></AnswerModal> */}
     </div>
   );
 }
