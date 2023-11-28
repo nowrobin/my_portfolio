@@ -35,6 +35,7 @@ export default function Main() {
               answer={i.answer}
               question={i.question}
               username={i.username}
+              checked={i.checked}
             ></AnswerCard>
           );
         })}
@@ -46,6 +47,7 @@ export default function Main() {
               answer={i.answer}
               question={i.question}
               username={i.username}
+              checked={i.checked}
             ></AnswerCard>
           );
         })}

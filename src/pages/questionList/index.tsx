@@ -9,32 +9,44 @@ export default function QuestionList() {
   const [Checkedqlist, setCheckedqlist] = useState<answerProp[]>([]);
   const [Qlist, setQlist] = useState<answerProp[]>([]);
   const [Clicked, setClick] = useState<boolean>(false);
-  const [Target, setTarget] = useState();
-  // useEffect(() => {
-  //   fetch("/api/uncheckedQ", { method: "GET" })
-  //     .then((res) => res.json())
-  //     .then((data) => setUncheckedqlist(data.allQuestion));
-  //   fetch("/api/checkedQ", { method: "GET" })
-  //     .then((res) => res.json())
-  //     .then((data) => setCheckedqlist(data.allQuestion));
-  // }, []);
+  const [Target, setTarget] = useState<answerProp>({
+    id: 0,
+    username: "",
+    question: "",
+    answer: "",
+    checked: false,
+  });
+
+  useEffect(() => {
+    fetch("/api/uncheckedQ", { method: "GET" })
+      .then((res) => res.json())
+      .then((data) => setUncheckedqlist(data.allQuestion));
+    fetch("/api/checkedQ", { method: "GET" })
+      .then((res) => res.json())
+      .then((data) => setCheckedqlist(data.allQuestion));
+  }, []);
 
   useEffect(() => {
     fetch("/api/getAllQ", { method: "GET" })
       .then((res) => res.json())
       .then((data) => setQlist(data.allQuestion));
-  });
-  // for(let i in Qlist){
-  //   if(Qlist[i].)
-  // }
+  }, []);
 
-  //api 호출 할때 다 받아와서 나누어주는 작업 하면는 더 시간이 단축됨,
+  // useEffect(() => {
+  //   for (let i in Qlist) {
+  //     if (Qlist[i].checked) {
+  //       setCheckedqlist((prev) => [...prev]);
+  //     } else setUncheckedqlist((prev) => [...prev]);
+  //   }
+  // }, [Qlist]);
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     setClick(true);
-    console.log(e.currentTarget.id);
+    let id = e.currentTarget.id;
+    let index = parseInt(id) - 1;
+    setTarget(Qlist[index]);
   };
-
+  console.log(Target);
   return (
     <div className="Container flex flex-col">
       <div className="grid grid-cols-3">
@@ -71,13 +83,15 @@ export default function QuestionList() {
           );
         })}
       </div>
-      Clicked &&{" "}
-      {/* <AnswerModal
-        id={0}
-        username={Target.username}
-        question={Target.question}
-        answer={null}
-      ></AnswerModal> */}
+      {Clicked && (
+        <AnswerModal
+          id={Target.id}
+          username={Target.username}
+          question={Target.question}
+          answer={null}
+          checked={false}
+        ></AnswerModal>
+      )}
     </div>
   );
 }

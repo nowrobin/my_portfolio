@@ -4,6 +4,7 @@ declare module "<answerProp>" {
     username: String;
     question: String;
     answer: String?;
+    checked: Boolean;
   };
 }
 
