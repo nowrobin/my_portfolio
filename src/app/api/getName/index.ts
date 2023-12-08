@@ -7,11 +7,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "GET") {
-    const allQuestion = await prisma.question.findMany({});
-    res.json({
-      status: 200,
-      allQuestion,
-    });
-  }
+  const allName = await prisma.nickname.findMany({});
+
+  //여기서 처리
+  res.json({ allName });
 }

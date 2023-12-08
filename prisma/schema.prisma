@@ -26,3 +26,10 @@ model Question{
   answer String?
 }
 
+model Nickname{
+  nickname String @id
+}
+
+model Adjective{
+  adj String @id
+}

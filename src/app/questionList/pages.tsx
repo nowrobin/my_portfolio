@@ -24,21 +24,13 @@ export default function QuestionList() {
     fetch("/api/checkedQ", { method: "GET" })
       .then((res) => res.json())
       .then((data) => setCheckedqlist(data.allQuestion));
-  }, []);
+  }, [Clicked]);
 
   useEffect(() => {
     fetch("/api/getAllQ", { method: "GET" })
       .then((res) => res.json())
       .then((data) => setQlist(data.allQuestion));
-  }, []);
-
-  // useEffect(() => {
-  //   for (let i in Qlist) {
-  //     if (Qlist[i].checked) {
-  //       setCheckedqlist((prev) => [...prev]);
-  //     } else setUncheckedqlist((prev) => [...prev]);
-  //   }
-  // }, [Qlist]);
+  }, [Clicked]);
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     setClick(true);
@@ -46,7 +38,7 @@ export default function QuestionList() {
     let index = parseInt(id) - 1;
     setTarget(Qlist[index]);
   };
-  console.log(Target);
+
   return (
     <div className="Container flex flex-col">
       <div className="grid grid-cols-3">
@@ -90,6 +82,7 @@ export default function QuestionList() {
           question={Target.question}
           answer={null}
           checked={false}
+          setClick={setClick}
         ></AnswerModal>
       )}
     </div>

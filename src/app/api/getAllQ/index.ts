@@ -14,14 +14,25 @@ export default async function handler(
       allQuestion,
     });
   }
-  if (req.method === "UPDATE") {
+  if (req.method === "PUT") {
     const updateQuestion = await prisma.question.update({
-      where: { id: Number(req.body.id) },
+      where: { id: req.body.id },
       data: {
         answer: req.body.answer,
         checked: true,
       },
     });
-    res.json(updateQuestion);
+    res.json({ status: 200, updateQuestion });
+  }
+  if (req.method === "POST") {
+    const updateQuestion = await prisma.question.create({
+      data: {
+        username: req.body.username,
+        question: req.body.question,
+        checked: false,
+        answer: "",
+      },
+    });
+    res.json({ status: 200, updateQuestion });
   }
 }
